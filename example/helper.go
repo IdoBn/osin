@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/RangelReale/osin"
 	"net/http"
 	"net/url"
+
+	"github.com/idobn/osin"
 )
 
 func HandleLoginPage(ar *osin.AuthorizeRequest, w http.ResponseWriter, r *http.Request) bool {
