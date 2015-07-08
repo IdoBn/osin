@@ -19,7 +19,7 @@ const (
 	ACCESS_COL    = "accesses"
 )
 
-const REFRESHTOKEN = "refreshtoken"
+const REFRESHTOKEN = "refreshToken"
 
 //keep session to mgo
 type OAuthStorage struct {
