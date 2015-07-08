@@ -38,29 +38,14 @@ type AuthorizeRequest struct {
 
 // Authorization data
 type AuthorizeData struct {
-	// Client information
-	Client Client
-
-	// Authorization code
-	Code string
-
-	// Token expiration in seconds
-	ExpiresIn int32
-
-	// Requested scope
-	Scope string
-
-	// Redirect Uri from request
-	RedirectUri string
-
-	// State data from request
-	State string
-
-	// Date created
-	CreatedAt time.Time
-
-	// Data to be passed to storage. Not used by the library.
-	UserData interface{}
+	Client      Client      `bson:"client" json:"client"`
+	Code        string      `bson:"code" json:"code"`
+	ExpiresIn   int32       `bson:"expiresIn" json:"expiresIn"`
+	Scope       string      `bson:"scope" json:"scope"`
+	RedirectUri string      `bson:"redirectUri" json:"redirectUri"`
+	State       string      `bson:"state" json:"state"`
+	CreatedAt   time.Time   `bson:"createdAt" json:"createdAt"`
+	UserData    interface{} `bson:"userData" json:"userData"`
 }
 
 // IsExpired is true if authorization expired

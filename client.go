@@ -17,10 +17,10 @@ type Client interface {
 
 // DefaultClient stores all data in struct variables
 type DefaultClient struct {
-	Id          string
-	Secret      string
-	RedirectUri string
-	UserData    interface{}
+	Id          string      `bson:"_id" json:"id"`
+	Secret      string      `bson:"secret" json:"secret"`
+	RedirectUri string      `bson:"redirectUri" json:"redirectUri"`
+	UserData    interface{} `bson:"userData" json:"userData"`
 }
 
 func (d *DefaultClient) GetId() string {

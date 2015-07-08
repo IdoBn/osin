@@ -54,35 +54,16 @@ type AccessRequest struct {
 
 // AccessData represents an access grant (tokens, expiration, client, etc)
 type AccessData struct {
-	// Client information
-	Client Client
-
-	// Authorize data, for authorization code
-	AuthorizeData *AuthorizeData
-
-	// Previous access data, for refresh token
-	AccessData *AccessData
-
-	// Access token
-	AccessToken string
-
-	// Refresh Token. Can be blank
-	RefreshToken string
-
-	// Token expiration in seconds
-	ExpiresIn int32
-
-	// Requested scope
-	Scope string
-
-	// Redirect Uri from request
-	RedirectUri string
-
-	// Date created
-	CreatedAt time.Time
-
-	// Data to be passed to storage. Not used by the library.
-	UserData interface{}
+	Client        Client         `bson:"client" json:"client"`
+	AuthorizeData *AuthorizeData `bson:"authorizeData" json:"authorizeData"`
+	AccessData    *AccessData    `bson:"accessData" json:"accessData"`
+	AccessToken   string         `bson:"accessToken" json:"accessToken"`
+	RefreshToken  string         `bson:"refreshToken" json:"refreshToken"`
+	ExpiresIn     int32          `bson:"expiresIn" json:"expiresIn"`
+	Scope         string         `bson:"scope" json:"scope"`
+	RedirectUri   string         `bson:"redirectUri" json:"redirectUri"`
+	CreatedAt     time.Time      `bson:"createdAt" json:"createdAt"`
+	UserData      interface{}    `bson:"userData" json:"userData"`
 }
 
 // IsExpired returns true if access expired
