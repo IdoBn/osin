@@ -30,6 +30,18 @@ type OAuthStorage struct {
 //initialize new storage -- should put global mgo session into
 func New(session *mgo.Session, dbName string) *OAuthStorage {
 	storage := &OAuthStorage{dbName, session}
+	index := mgo.Index{
+		Key:        []string{REFRESHTOKEN},
+		Unique:     false, // refreshtoken is sometimes empty
+		DropDups:   false,
+		Background: true,
+		Sparse:     true,
+	}
+	accesses := storage.Session.DB(dbName).C(ACCESS_COL)
+	err := accesses.EnsureIndex(index)
+	if err != nil {
+		panic(err)
+	}
 	return storage
 }
 
