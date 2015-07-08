@@ -17,7 +17,7 @@ type Client interface {
 
 // DefaultClient stores all data in struct variables
 type DefaultClient struct {
-	Id          string      `bson:"_id" json:"id"`
+	Id          string      `bson:"_id" json:"_id"` // how to fix this!!!!
 	Secret      string      `bson:"secret" json:"secret"`
 	RedirectUri string      `bson:"redirectUri" json:"redirectUri"`
 	UserData    interface{} `bson:"userData" json:"userData"`

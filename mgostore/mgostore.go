@@ -28,7 +28,7 @@ type OAuthStorage struct {
 }
 
 //initialize new storage -- should put global mgo session into
-func NewOAuthStorage(session *mgo.Session, dbName string) *OAuthStorage {
+func New(session *mgo.Session, dbName string) *OAuthStorage {
 	storage := &OAuthStorage{dbName, session}
 	return storage
 }
@@ -52,7 +52,7 @@ func (s *OAuthStorage) GetClient(id string) (osin.Client, error) {
 	clients := s.Session.DB(s.dbName).C(CLIENT_COL)
 	client := &osin.DefaultClient{}
 
-	err := clients.Find(bson.M{"id": id}).One(client)
+	err := clients.Find(bson.M{"_id": id}).One(client)
 	return client, err
 }
 
