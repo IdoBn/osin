@@ -23,23 +23,23 @@ type DefaultClient struct {
 	UserData    interface{} `bson:"userData" json:"userData"`
 }
 
-func (d *DefaultClient) GetId() string {
+func (d DefaultClient) GetId() string {
 	return d.Id
 }
 
-func (d *DefaultClient) GetSecret() string {
+func (d DefaultClient) GetSecret() string {
 	return d.Secret
 }
 
-func (d *DefaultClient) GetRedirectUri() string {
+func (d DefaultClient) GetRedirectUri() string {
 	return d.RedirectUri
 }
 
-func (d *DefaultClient) GetUserData() interface{} {
+func (d DefaultClient) GetUserData() interface{} {
 	return d.UserData
 }
 
-func (d *DefaultClient) CopyFrom(client Client) {
+func (d DefaultClient) CopyFrom(client Client) {
 	d.Id = client.GetId()
 	d.Secret = client.GetSecret()
 	d.RedirectUri = client.GetRedirectUri()
