@@ -95,6 +95,24 @@ func TestGetClient(t *testing.T) {
 	}
 }
 
+func TestGetClients(t *testing.T) {
+	storage := initTestStorage()
+	defer deleteTestDatabase(storage)
+	client, err := setClient1234(storage)
+	if err != nil {
+		t.Errorf("setClient returned err: %v", err)
+		return
+	}
+	getClients, err := storage.GetClients(bson.M{}, 1, 1)
+	if err != nil {
+		t.Errorf("getClients returned err: %v", err)
+		return
+	}
+	if !reflect.DeepEqual(&getClients[0], client) {
+		t.Errorf("TestGetClients failed, expected: '%+v', got: '%+v'", client, getClients[0])
+	}
+}
+
 func saveAuthorization(storage *OAuthStorage) (*osin.AuthorizeData, error) {
 	client, err := setClient1234(storage)
 	if err != nil {

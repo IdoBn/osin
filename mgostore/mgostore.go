@@ -68,6 +68,15 @@ func (s *OAuthStorage) GetClient(id string) (osin.Client, error) {
 	return client, err
 }
 
+func (s *OAuthStorage) GetClients(query bson.M, pageSize, pageNum int) ([]osin.DefaultClient, error) {
+	// err = sess.DB("test").C("foo").Find(bson.M{}).Skip(pagesize * (n - 1)).Limit(10)
+	clients := s.Session.DB(s.dbName).C(CLIENT_COL)
+	clientArr := []osin.DefaultClient{}
+
+	err := clients.Find(query).Skip(pageSize * (pageNum - 1)).Limit(pageSize).All(&clientArr)
+	return clientArr, err
+}
+
 func (s *OAuthStorage) SetClient(id string, client osin.Client) error {
 	clients := s.Session.DB(s.dbName).C(CLIENT_COL)
 	_, err := clients.UpsertId(id, client)
