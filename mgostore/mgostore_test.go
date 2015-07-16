@@ -113,6 +113,20 @@ func TestGetClients(t *testing.T) {
 	}
 }
 
+func TestRemoveClient(t *testing.T) {
+	storage := initTestStorage()
+	defer deleteTestDatabase(storage)
+	client, err := setClient1234(storage)
+	if err != nil {
+		t.Errorf("setClient returned err: %v", err)
+		return
+	}
+	err = storage.RemoveClient(client.GetId())
+	if err != nil {
+		t.Errorf("TestRemoveClient failed exceptions '%+v'", err)
+	}
+}
+
 func saveAuthorization(storage *OAuthStorage) (*osin.AuthorizeData, error) {
 	client, err := setClient1234(storage)
 	if err != nil {

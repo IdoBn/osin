@@ -83,6 +83,13 @@ func (s *OAuthStorage) SetClient(id string, client osin.Client) error {
 	return err
 }
 
+// RemoveClient todo
+func (s *OAuthStorage) RemoveClient(id string) error {
+	clients := s.Session.DB(s.dbName).C(CLIENT_COL)
+	err := clients.RemoveId(id)
+	return err
+}
+
 func (s *OAuthStorage) SaveAuthorize(data *osin.AuthorizeData) error {
 	authorizations := s.Session.DB(s.dbName).C(AUTHORIZE_COL)
 	_, err := authorizations.UpsertId(data.Code, data)
